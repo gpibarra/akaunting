@@ -29,6 +29,7 @@ class Items extends Export
     public function fields(): array
     {
         return [
+            'id',
             'name',
             'description',
             'sale_price',

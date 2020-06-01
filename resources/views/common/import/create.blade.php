@@ -36,6 +36,14 @@
                         {!! $errors->first('import', '<p class="help-block">:message</p>') !!}
                     </div>
                 @stack('import_input_end')
+
+                @if ($allowUpdate)
+                <div class="row">
+                    <div class="col-md-12">
+                        <label><input type="checkbox" id="only_update" name="only_update"> {!! trans('import.only_update') !!}</label><br>
+                    </div>
+                </div>
+                @endif
             </div>
 
             <div class="card-footer">

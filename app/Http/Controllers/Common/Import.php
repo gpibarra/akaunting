@@ -23,6 +23,12 @@ class Import extends Controller
             $namespace = '';
         }
 
-        return view('common.import.create', compact('group', 'type', 'path', 'namespace'));
+        $allowUpdate = false;
+        $importerClassName = "\\App\\Imports\\".ucfirst($group)."\\".ucfirst($type);
+        if (class_exists($importerClassName."Update")) {
+            $allowUpdate = true;
+        }
+
+        return view('common.import.create', compact('group', 'type', 'path', 'namespace', 'allowUpdate'));
     }
 }

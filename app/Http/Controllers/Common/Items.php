@@ -8,6 +8,7 @@ use App\Http\Requests\Common\Item as Request;
 use App\Http\Requests\Common\Import as ImportRequest;
 use App\Http\Requests\Common\TotalItem as TotalRequest;
 use App\Imports\Common\Items as Import;
+use App\Imports\Common\ItemsUpdate as Update;
 use App\Jobs\Common\CreateItem;
 use App\Jobs\Common\DeleteItem;
 use App\Jobs\Common\UpdateItem;
@@ -113,7 +114,11 @@ class Items extends Controller
      */
     public function import(ImportRequest $request)
     {
-        \Excel::import(new Import(), $request->file('import'));
+        if (!$request->get('only_update')) {
+            \Excel::import(new Import(), $request->file('import'));
+        } else {
+            \Excel::import(new Update(), $request->file('import'));
+        }
 
         $message = trans('messages.success.imported', ['type' => trans_choice('general.items', 2)]);
 

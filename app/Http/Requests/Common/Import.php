@@ -24,6 +24,7 @@ class Import extends FormRequest
     public function rules()
     {
         return [
+            'update' => 'boolean',
             'import' => 'required|file|extension:xls,xlsx',
         ];
     }
